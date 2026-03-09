@@ -80,7 +80,7 @@ const jsonLd = {
   url: BASE_URL,
   sameAs: [
     "https://github.com/MT0100",
-    "https://linkedin.com/in/mertozek",
+    "https://www.linkedin.com/in/mert-%C3%B6-243262198/",
     "https://twitter.com/mertozek",
     "https://blog.mertozek.me",
   ],

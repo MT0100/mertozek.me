@@ -7,7 +7,7 @@ import Image from "next/image";
 export default function Hero() {
   const socialLinks = [
     { icon: Github, href: "https://github.com/MT0100", label: "GitHub" },
-    { icon: Linkedin, href: "https://linkedin.com/in/mertozek", label: "LinkedIn" },
+    { icon: Linkedin, href: "https://www.linkedin.com/in/mert-%C3%B6-243262198/", label: "LinkedIn" },
     { icon: Twitter, href: "https://twitter.com/mertozek", label: "Twitter" },
     { icon: FileText, href: "/cv.pdf", label: "CV" },
   ];

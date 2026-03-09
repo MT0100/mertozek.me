@@ -4,7 +4,7 @@ import { Github, Linkedin, Twitter, Globe } from "lucide-react";
 
 const socials = [
   { icon: Github, href: "https://github.com/MT0100", label: "GitHub" },
-  { icon: Linkedin, href: "https://linkedin.com/in/mertozek", label: "LinkedIn" },
+  { icon: Linkedin, href: "https://www.linkedin.com/in/mert-%C3%B6-243262198/", label: "LinkedIn" },
   { icon: Twitter, href: "https://twitter.com/mertozek", label: "Twitter" },
   { icon: Globe, href: "https://blog.mertozek.me", label: "Blog" },
 ];

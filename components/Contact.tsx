@@ -84,7 +84,7 @@ export default function Contact() {
 
               <div className="flex flex-col gap-3">
                 <motion.a
-                  href="https://linkedin.com/in/mertozek"
+                  href="https://www.linkedin.com/in/mert-%C3%B6-243262198/"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="flex items-center gap-3 bg-electric-indigo hover:bg-electric-indigo/80 text-white rounded-xl px-6 py-3 font-semibold transition-all"
