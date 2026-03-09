@@ -6,7 +6,7 @@ import { Briefcase, Award, Zap, CheckCircle } from "lucide-react";
 
 const stats = [
   { icon: Briefcase, label: "Projects", value: 5, suffix: "+", prefix: "" },
-  { icon: Award, label: "TÜBİTAK Funded", value: 900, suffix: "K TL", prefix: "" },
+  { icon: Award, label: "TÜBİTAK Funded", value: null, suffix: "", prefix: "" },
   { icon: Zap, label: "Automations", value: 50, suffix: "+", prefix: "" },
   { icon: CheckCircle, label: "Available for Hire", value: null, suffix: "", prefix: "" },
 ];
@@ -67,6 +67,8 @@ export default function StatsBar() {
               <div className="text-3xl font-bold bg-gradient-to-r from-electric-indigo to-neon-cyan bg-clip-text text-transparent">
                 {stat.value !== null ? (
                   <AnimatedNumber target={stat.value} suffix={stat.suffix} prefix={stat.prefix} />
+                ) : stat.label === "TÜBİTAK Funded" ? (
+                  <span className="text-neon-cyan text-2xl">✓ Yes</span>
                 ) : (
                   <span className="text-green-400 text-2xl">✓ Open</span>
                 )}

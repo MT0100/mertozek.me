@@ -1,41 +1,19 @@
 "use client";
 
+import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { Calendar, ArrowRight, ExternalLink } from "lucide-react";
-import Image from "next/image";
 
-const posts = [
-  {
-    slug: "tubitak-bigg-yolculugu",
-    title: "TÜBİTAK BİGG ile 900K TL Hibe Aldık",
-    excerpt:
-      "StoryLiv olarak TÜBİTAK BİGG programından 900.000 TL hibe almaya hak kazandık. Bu süreçte öğrendiklerimizi ve başvuru stratejimizi paylaşıyorum.",
-    date: "2026-02-15",
-    coverImage: "/images/blog-tubitak.jpg",
-    fallback: true,
-  },
-  {
-    slug: "itu-cekirdek-deneyimi",
-    title: "İTÜ Çekirdek Accelerator'da 6 Ay",
-    excerpt:
-      "İstanbul Teknik Üniversitesi'nin girişim hızlandırma programında geçirdiğimiz 6 ayın ardından startup hayatı hakkında gerçekçi bir değerlendirme.",
-    date: "2025-11-10",
-    coverImage: "/images/blog-itu.jpg",
-    fallback: true,
-  },
-  {
-    slug: "tua-astrohackathon-it-director",
-    title: "TUA AstroHackathon: IT Director Olarak Sahada",
-    excerpt:
-      "Türkiye Uzay Ajansı'nın AstroHackathon etkinliğinde IT Director olarak platform yönetimi ve teknik altyapı kurulumunda yaşadıklarım.",
-    date: "2026-01-20",
-    coverImage: "/images/blog-tua.jpg",
-    fallback: true,
-  },
-];
+interface BlogPost {
+  slug: string;
+  title: string;
+  excerpt: string;
+  published_at: string;
+  feature_image: string | null;
+}
 
 function formatDate(dateStr: string) {
-  return new Date(dateStr).toLocaleDateString("tr-TR", {
+  return new Date(dateStr).toLocaleDateString("en-US", {
     year: "numeric",
     month: "long",
     day: "numeric",
@@ -43,6 +21,45 @@ function formatDate(dateStr: string) {
 }
 
 export default function BlogFeed() {
+  const [posts, setPosts] = useState<BlogPost[]>([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    async function fetchPosts() {
+      try {
+        const res = await fetch("/api/blog-posts");
+        if (res.ok) {
+          const data = await res.json();
+          setPosts(data.posts || []);
+        }
+      } catch {
+        // Silently fail, show nothing
+      } finally {
+        setLoading(false);
+      }
+    }
+    fetchPosts();
+  }, []);
+
+  if (loading) {
+    return (
+      <section className="py-20 px-4" id="blog">
+        <div className="max-w-6xl mx-auto text-center text-white/40">
+          Loading posts...
+        </div>
+      </section>
+    );
+  }
+
+  if (posts.length === 0) return null;
+
+  // Filter out "Coming soon" placeholder
+  const realPosts = posts.filter(
+    (p) => p.title.toLowerCase() !== "coming soon"
+  );
+
+  if (realPosts.length === 0) return null;
+
   return (
     <section className="py-20 px-4" id="blog">
       <div className="max-w-6xl mx-auto">
@@ -63,7 +80,7 @@ export default function BlogFeed() {
         </motion.div>
 
         <div className="grid md:grid-cols-3 gap-6 mb-12">
-          {posts.map((post, index) => (
+          {realPosts.slice(0, 3).map((post, index) => (
             <motion.a
               key={post.slug}
               href={`https://blog.mertozek.me/${post.slug}`}
@@ -78,31 +95,28 @@ export default function BlogFeed() {
             >
               {/* Cover Image */}
               <div className="relative h-44 bg-gradient-to-br from-electric-indigo/20 to-neon-cyan/20 flex items-center justify-center overflow-hidden">
-                {!post.fallback ? (
-                  <Image
-                    src={post.coverImage}
+                {post.feature_image ? (
+                  <img
+                    src={post.feature_image}
                     alt={post.title}
-                    fill
-                    className="object-cover"
+                    className="absolute inset-0 w-full h-full object-cover"
                   />
                 ) : (
                   <div className="absolute inset-0 bg-gradient-to-br from-electric-indigo/30 to-neon-cyan/20" />
                 )}
-                <div className="relative z-10 w-16 h-16 rounded-full bg-white/10 border border-white/20 flex items-center justify-center">
-                  <span className="text-2xl">✍️</span>
-                </div>
+                <div className="absolute inset-0 bg-black/30" />
               </div>
 
               {/* Content */}
               <div className="p-6 flex flex-col flex-1">
                 <div className="flex items-center gap-2 text-xs text-neon-cyan font-mono mb-3">
                   <Calendar className="w-3.5 h-3.5" />
-                  {formatDate(post.date)}
+                  {formatDate(post.published_at)}
                 </div>
                 <h3 className="font-bold text-lg mb-2 leading-snug group-hover:text-neon-cyan transition-colors">
                   {post.title}
                 </h3>
-                <p className="text-white/60 text-sm leading-relaxed flex-1">
+                <p className="text-white/60 text-sm leading-relaxed flex-1 line-clamp-3">
                   {post.excerpt}
                 </p>
                 <div className="flex items-center gap-1.5 mt-4 text-electric-indigo text-sm font-medium">

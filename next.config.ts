@@ -15,6 +15,16 @@ const nextConfig: NextConfig = {
   reactStrictMode: true,
   poweredByHeader: false,
   distDir: '.next-build',
+  output: 'standalone',
+  env: {
+    GHOST_ADMIN_API_KEY: process.env.GHOST_ADMIN_API_KEY || '',
+  },
+  images: {
+    remotePatterns: [
+      { protocol: 'https', hostname: 'blog.mertozek.me' },
+      { protocol: 'https', hostname: 'static.ghost.org' },
+    ],
+  },
   async headers() {
     return [{ source: '/(.*)', headers: securityHeaders }];
   },
