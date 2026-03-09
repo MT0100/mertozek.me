@@ -16,7 +16,7 @@ export const metadata: Metadata = {
     template: "%s | Mert Özek",
   },
   description:
-    "Computer Engineering student, AI Engineer, and Founder of StoryLiv. TÜBİTAK BİGG grantee. Passionate about AI, autonomous systems, n8n automation, and self-hosting.",
+    "Computer Engineering student, AI Engineer, and Founder of StoryLiv. İTÜ Çekirdek BİGG accelerator. Passionate about AI, autonomous systems, n8n automation, and self-hosting.",
   keywords: [
     "AI Engineer",
     "StoryLiv",
@@ -24,7 +24,7 @@ export const metadata: Metadata = {
     "ROS",
     "Autonomous Systems",
     "n8n",
-    "TÜBİTAK",
+    "İTÜ Çekirdek BİGG",
     "İTÜ Çekirdek",
     "Next.js",
     "Self-Hosting",
@@ -39,7 +39,7 @@ export const metadata: Metadata = {
     siteName: "Mert Özek",
     title: "Mert Özek — AI Engineer & Founder",
     description:
-      "AI Engineer, Founder of StoryLiv, TÜBİTAK BİGG grantee. Building the future of AI-powered interactive experiences.",
+      "AI Engineer, Founder of StoryLiv, İTÜ Çekirdek BİGG accelerator. Building the future of AI-powered interactive experiences.",
     images: [
       {
         url: "/images/og-image.png",
@@ -53,7 +53,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Mert Özek — AI Engineer & Founder",
     description:
-      "AI Engineer, Founder of StoryLiv, TÜBİTAK BİGG grantee. Building the future of AI-powered interactive experiences.",
+      "AI Engineer, Founder of StoryLiv, İTÜ Çekirdek BİGG accelerator. Building the future of AI-powered interactive experiences.",
     creator: "@mertozek",
     images: ["/images/og-image.png"],
   },
@@ -91,7 +91,7 @@ const jsonLd = {
     url: "https://storyliv.com",
   },
   description:
-    "Computer Engineering student, AI Engineer, and Founder of StoryLiv. TÜBİTAK BİGG grantee. Passionate about AI, autonomous systems, and self-hosting.",
+    "Computer Engineering student, AI Engineer, and Founder of StoryLiv. İTÜ Çekirdek BİGG accelerator. Passionate about AI, autonomous systems, and self-hosting.",
   image: `${BASE_URL}/images/profile.png`,
   email: "mert@mertozek.me",
 };
