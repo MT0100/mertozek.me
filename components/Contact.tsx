@@ -10,9 +10,32 @@ export default function Contact() {
   async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
     e.preventDefault();
     setStatus("sending");
-    // Placeholder — wire up to your preferred email service
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
+    const form = e.currentTarget;
+    const data = new FormData(form);
+    const payload = {
+      name: data.get("name") as string,
+      email: data.get("email") as string,
+      message: data.get("message") as string,
+    };
+    try {
+      const res = await fetch("/api/contact", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(payload),
+      });
+      if (res.ok) {
+        setStatus("sent");
+        form.reset();
+      } else {
+        window.open(
+          `mailto:forms@mertozek.me?subject=Contact from ${payload.name}&body=${encodeURIComponent(payload.message)}%0A%0AFrom: ${payload.email}`
+        );
+        setStatus("sent");
+      }
+    } catch {
+      window.open(`mailto:forms@mertozek.me`);
+      setStatus("sent");
+    }
   }
 
   return (
