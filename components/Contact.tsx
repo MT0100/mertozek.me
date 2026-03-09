@@ -1,108 +1,159 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { Mail, MessageCircle } from "lucide-react";
+import { Mail, MessageCircle, Send, User, AtSign } from "lucide-react";
+import { useState } from "react";
 
 export default function Contact() {
+  const [status, setStatus] = useState<"idle" | "sending" | "sent">("idle");
+
+  async function handleSubmit(e: React.FormEvent<HTMLFormElement>) {
+    e.preventDefault();
+    setStatus("sending");
+    // Placeholder — wire up to your preferred email service
+    await new Promise((r) => setTimeout(r, 1200));
+    setStatus("sent");
+  }
+
   return (
-    <section className="min-h-screen flex items-center justify-center px-4 py-20" id="contact">
+    <section className="py-20 px-4" id="contact">
       <div className="max-w-4xl mx-auto w-full">
         <motion.div
-          className="glass glass-hover rounded-3xl p-12 text-center relative overflow-hidden"
-          initial={{ opacity: 0, y: 30 }}
+          initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           viewport={{ once: true }}
           transition={{ duration: 0.8 }}
         >
-          {/* Background glow */}
-          <div className="absolute inset-0 bg-gradient-to-br from-electric-indigo/10 to-neon-cyan/10 pointer-events-none" />
-
-          {/* Icon */}
-          <motion.div
-            className="relative w-20 h-20 mx-auto mb-8"
-            initial={{ scale: 0 }}
-            whileInView={{ scale: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.2, type: "spring" }}
-          >
-            <div className="absolute inset-0 bg-neon-cyan rounded-full blur-2xl opacity-40 animate-pulse" />
-            <div className="relative w-full h-full bg-neon-cyan/20 rounded-full border-2 border-neon-cyan/40 flex items-center justify-center">
-              <MessageCircle className="w-10 h-10 text-neon-cyan" />
-            </div>
-          </motion.div>
-
-          {/* Title */}
-          <motion.h2
-            className="text-4xl md:text-5xl font-bold mb-4"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.3 }}
-          >
+          <h2 className="text-4xl md:text-5xl font-bold mb-4 text-center">
             <span className="bg-gradient-to-r from-neon-cyan via-electric-indigo to-neon-cyan bg-clip-text text-transparent">
               Let&apos;s Build Something Together
             </span>
-          </motion.h2>
-
-          {/* Description */}
-          <motion.p
-            className="text-white/70 text-lg mb-12 max-w-2xl mx-auto"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.4 }}
-          >
-            Whether you have a project in mind, want to collaborate, or just want to say hi, 
-            I&apos;m always open to new opportunities and conversations.
-          </motion.p>
-
-          {/* CTA Buttons */}
-          <motion.div
-            className="flex flex-col sm:flex-row gap-4 justify-center items-center"
-            initial={{ opacity: 0, y: 20 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.5 }}
-          >
-            <motion.a
-              href="https://linkedin.com/in/mertozek"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass glass-hover rounded-xl px-8 py-4 font-semibold flex items-center gap-3 transition-all group"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <Mail className="w-5 h-5 text-neon-cyan group-hover:rotate-12 transition-transform" />
-              <span>Connect on LinkedIn</span>
-            </motion.a>
-
-            <motion.a
-              href="https://github.com/MT0100"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="glass glass-hover rounded-xl px-8 py-4 font-semibold transition-all"
-              whileHover={{ scale: 1.05 }}
-              whileTap={{ scale: 0.95 }}
-            >
-              <span className="bg-gradient-to-r from-electric-indigo to-neon-cyan bg-clip-text text-transparent">
-                Explore GitHub
-              </span>
-            </motion.a>
-          </motion.div>
-
-          {/* Footer */}
-          <motion.div
-            className="mt-12 pt-8 border-t border-white/10"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ delay: 0.6 }}
-          >
-            <p className="text-white/40 text-sm">
-              © 2025 Mert Özek. Built with Next.js, TypeScript, and Framer Motion.
-            </p>
-          </motion.div>
+          </h2>
+          <p className="text-center text-white/60 mb-12 max-w-2xl mx-auto">
+            Open to freelance projects, collaborations, and full-time opportunities.
+          </p>
         </motion.div>
+
+        <div className="grid md:grid-cols-2 gap-8">
+          {/* Left: Hire Me CTA */}
+          <motion.div
+            className="glass glass-hover rounded-2xl p-8 flex flex-col justify-between relative overflow-hidden"
+            initial={{ opacity: 0, x: -30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.2 }}
+          >
+            <div className="absolute inset-0 bg-gradient-to-br from-electric-indigo/10 to-neon-cyan/10 pointer-events-none" />
+
+            <div className="relative">
+              <div className="w-16 h-16 mb-6 relative">
+                <div className="absolute inset-0 bg-neon-cyan rounded-full blur-2xl opacity-40 animate-pulse" />
+                <div className="relative w-full h-full bg-neon-cyan/20 rounded-full border-2 border-neon-cyan/40 flex items-center justify-center">
+                  <MessageCircle className="w-8 h-8 text-neon-cyan" />
+                </div>
+              </div>
+
+              <h3 className="text-2xl font-bold mb-3">Available for Hire</h3>
+              <p className="text-white/60 leading-relaxed mb-6">
+                Looking for an AI engineer or automation specialist? I&apos;m open to
+                freelance projects and part-time collaborations.
+              </p>
+
+              <div className="flex flex-col gap-3">
+                <motion.a
+                  href="https://linkedin.com/in/mertozek"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 bg-electric-indigo hover:bg-electric-indigo/80 text-white rounded-xl px-6 py-3 font-semibold transition-all"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <Mail className="w-5 h-5" />
+                  Hire Me on LinkedIn
+                </motion.a>
+
+                <motion.a
+                  href="https://github.com/MT0100"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="flex items-center gap-3 glass glass-hover rounded-xl px-6 py-3 font-semibold transition-all"
+                  whileHover={{ scale: 1.04 }}
+                  whileTap={{ scale: 0.96 }}
+                >
+                  <span className="bg-gradient-to-r from-electric-indigo to-neon-cyan bg-clip-text text-transparent">
+                    Explore GitHub
+                  </span>
+                </motion.a>
+              </div>
+            </div>
+          </motion.div>
+
+          {/* Right: Contact Form */}
+          <motion.div
+            className="glass glass-hover rounded-2xl p-8"
+            initial={{ opacity: 0, x: 30 }}
+            whileInView={{ opacity: 1, x: 0 }}
+            viewport={{ once: true }}
+            transition={{ delay: 0.3 }}
+          >
+            {status === "sent" ? (
+              <div className="h-full flex flex-col items-center justify-center text-center gap-4">
+                <div className="text-5xl">🚀</div>
+                <h3 className="text-2xl font-bold text-neon-cyan">Message Sent!</h3>
+                <p className="text-white/60">I&apos;ll get back to you soon.</p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div className="relative">
+                  <User className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                  <input
+                    type="text"
+                    name="name"
+                    placeholder="Your Name"
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm placeholder:text-white/30 focus:outline-none focus:border-electric-indigo/60 transition-colors"
+                  />
+                </div>
+
+                <div className="relative">
+                  <AtSign className="absolute left-3 top-3.5 w-4 h-4 text-white/40" />
+                  <input
+                    type="email"
+                    name="email"
+                    placeholder="Email Address"
+                    required
+                    className="w-full bg-white/5 border border-white/10 rounded-xl py-3 pl-10 pr-4 text-sm placeholder:text-white/30 focus:outline-none focus:border-electric-indigo/60 transition-colors"
+                  />
+                </div>
+
+                <textarea
+                  name="message"
+                  rows={5}
+                  placeholder="Your message..."
+                  required
+                  className="w-full bg-white/5 border border-white/10 rounded-xl py-3 px-4 text-sm placeholder:text-white/30 focus:outline-none focus:border-electric-indigo/60 transition-colors resize-none"
+                />
+
+                <motion.button
+                  type="submit"
+                  disabled={status === "sending"}
+                  className="flex items-center justify-center gap-2 bg-gradient-to-r from-electric-indigo to-neon-cyan text-white rounded-xl py-3 px-6 font-semibold disabled:opacity-60 transition-all"
+                  whileHover={{ scale: 1.03 }}
+                  whileTap={{ scale: 0.97 }}
+                >
+                  {status === "sending" ? (
+                    "Sending..."
+                  ) : (
+                    <>
+                      <Send className="w-4 h-4" />
+                      Send Message
+                    </>
+                  )}
+                </motion.button>
+              </form>
+            )}
+          </motion.div>
+        </div>
       </div>
     </section>
   );

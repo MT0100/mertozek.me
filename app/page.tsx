@@ -1,7 +1,11 @@
 import Hero from "@/components/Hero";
+import StatsBar from "@/components/StatsBar";
 import About from "@/components/About";
+import Services from "@/components/Services";
 import Projects from "@/components/Projects";
+import BlogFeed from "@/components/BlogFeed";
 import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
 
 export default function Home() {
   return (
@@ -15,9 +19,13 @@ export default function Home() {
       {/* Content */}
       <div className="relative z-10">
         <Hero />
+        <StatsBar />
         <About />
+        <Services />
         <Projects />
+        <BlogFeed />
         <Contact />
+        <Footer />
       </div>
     </main>
   );

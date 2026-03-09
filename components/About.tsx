@@ -9,6 +9,9 @@ export default function About() {
     { year: "2023", event: "Teknofest Finalist", icon: Trophy, desc: "NLP Sentiment Analysis project" },
     { year: "2023", event: "Teknofest Competitor", icon: Rocket, desc: "Autonomous Robotaxi with ROS/C++" },
     { year: "2025", event: "Founded StoryLiv", icon: Rocket, desc: "AI interactive gaming startup" },
+    { year: "2025", event: "İTÜ Çekirdek Accelerator", icon: Trophy, desc: "Selected for İTÜ's startup accelerator program" },
+    { year: "2026", event: "TÜBİTAK BİGG 900K TL", icon: Server, desc: "Secured 900,000 TL grant for StoryLiv" },
+    { year: "2026", event: "TUA AstroHackathon", icon: Rocket, desc: "IT Director — platform & infra lead" },
   ];
 
   const techStack = [
